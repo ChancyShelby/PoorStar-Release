@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68,<76", "wheel>=0.42,<0.46"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "poorstar"
+version = "0.1.0"
+description = "Persistent Intent for hierarchical StarCraft II control"
+readme = "README.md"
+requires-python = ">=3.10,<3.11"
+dependencies = ["numpy>=1.26.4,<2", "torch>=2.2.2,<2.3"]
+
+[project.optional-dependencies]
+sc2 = [
+  "protobuf==3.20.3", "PySC2==4.0.0", "s2clientprotocol==5.0.14.93333.0",
+  "s2protocol==5.0.16.97563.0", "sc2reader==1.8.0", "mpyq==0.2.5", "absl-py>=2,<3",
+]
+storage = ["zstandard==0.25.0"]
+test = ["pytest==8.4.2", "pytest-subtests==0.14.2"]
+
+[project.scripts]
+poorstar-train = "poorstar.cli.training.train:main"
+poorstar-train-foundation = "poorstar.cli.training.train_foundation:main"
+poorstar-collect = "poorstar.cli.training.collect:main"
+poorstar-league = "poorstar.cli.league.run:main"
+poorstar-worker = "poorstar.cli.league.worker:main"
+poorstar-evaluate = "poorstar.cli.evaluation.run:main"
+poorstar-evaluate-bc = "poorstar.cli.evaluation.bc:main"
+poorstar-build-data = "poorstar.cli.data.build:main"
+poorstar-extract = "poorstar.cli.data.extract:main"
+poorstar-prepare-data = "poorstar.cli.data.prepare:main"
+poorstar-partition-data = "poorstar.cli.data.partition:main"
+poorstar-annotate = "poorstar.cli.data.annotate:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["poorstar*"]
+exclude = ["tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers --disable-warnings"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100

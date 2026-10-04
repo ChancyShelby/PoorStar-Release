@@ -1,0 +1,10 @@
+include README.md LICENSE_STATUS.md THIRD_PARTY_NOTICES.md pyproject.toml RELEASE_MANIFEST.json .gitignore .gitattributes
+recursive-include poorstar *.py
+recursive-include docs *.md
+recursive-include examples *.py
+recursive-include tests *.py
+recursive-include scripts *.py
+recursive-include .github *.yml
+prune build
+prune dist
+global-exclude __pycache__ *.py[cod] .DS_Store
